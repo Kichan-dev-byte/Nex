@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // Polyfill to prevent sandboxed or extension-injected environment crashes
+      (function() {
+        try {
+          if (typeof window !== 'undefined') {
+            let chromeObj = window.chrome;
+            if (!chromeObj) {
+              chromeObj = {};
+              try {
+                window.chrome = chromeObj;
+              } catch (e) {
+                try {
+                  Object.defineProperty(window, 'chrome', {
+                    value: chromeObj,
+                    writable: true,
+                    configurable: true
+                  });
+                } catch (err) {}
+              }
+            }
+            
+            let runtimeObj = chromeObj.runtime;
+            if (!runtimeObj) {
+              runtimeObj = {};
+              try {
+                chromeObj.runtime = runtimeObj;
+              } catch (e) {
+                try {
+                  Object.defineProperty(chromeObj, 'runtime', {
+                    value: runtimeObj,
+                    writable: true,
+                    configurable: true
+                  });
+                } catch (err) {}
+              }
+            }
+            
+            if (typeof runtimeObj.getManifest !== 'function') {
+              try {
+                runtimeObj.getManifest = function() {
+                  return {
+                    name: "Mock Extension",
+                    version: "1.0.0",
+                    manifest_version: 3
+                  };
+                };
+              } catch (e) {
+                try {
+                  Object.defineProperty(runtimeObj, 'getManifest', {
+                    value: function() {
+                      return {
+                        name: "Mock Extension",
+                        version: "1.0.0",
+                        manifest_version: 3
+                      };
+                    },
+                    writable: true,
+                    configurable: true
+                  });
+                } catch (err) {}
+              }
+            }
+          }
+        } catch (globalError) {
+          console.warn("Chrome API polyfill warning:", globalError);
+        }
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

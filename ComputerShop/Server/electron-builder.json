@@ -1,0 +1,36 @@
+{
+  "appId": "com.computershop.server",
+  "productName": "Computer Shop Server",
+  "directories": {
+    "output": "dist-package",
+    "buildResources": "build"
+  },
+  "files": [
+    "dist/**/*",
+    "package.json",
+    "node_modules/**/*"
+  ],
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": [
+          "x64",
+          "ia32"
+        ]
+      }
+    ],
+    "icon": "src/assets/icon.ico"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "Computer Shop Server",
+    "uninstallDisplayName": "Computer Shop Server Uninstaller",
+    "installerIcon": "src/assets/icon.ico",
+    "uninstallerIcon": "src/assets/icon.ico",
+    "runAfterFinish": true
+  }
+}

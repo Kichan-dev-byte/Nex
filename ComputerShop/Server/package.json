@@ -1,0 +1,51 @@
+{
+  "name": "computer-shop-server",
+  "version": "1.0.0",
+  "description": "LAN Computer Shop Management System - Server Application",
+  "main": "dist/main/main.js",
+  "author": "Senior Software Engineer",
+  "license": "ISC",
+  "scripts": {
+    "build": "tsc && vite build --config src/renderer/vite.config.ts",
+    "start": "electron .",
+    "dev": "concurrently \"tsc -w\" \"vite --config src/renderer/vite.config.ts\" \"nodemon --watch dist/main --exec electron .\"",
+    "dist": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.0",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "electron": "^34.0.0",
+    "electron-builder": "^25.1.8",
+    "nodemon": "^3.1.9",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7",
+    "@vitejs/plugin-react": "^5.0.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "build": {
+    "appId": "com.computershop.server",
+    "productName": "Computer Shop Server",
+    "directories": {
+      "output": "dist-package"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "src/assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Computer Shop Server",
+      "uninstallDisplayName": "Computer Shop Server Uninstaller"
+    }
+  }
+}

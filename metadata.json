@@ -1,0 +1,6 @@
+{
+  "name": "LAN Computer Shop Management System",
+  "description": "A complete LAN Computer Shop Management System featuring a Server Cashier Dashboard with remote controls and a client fullscreen lock/timer lock.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
