@@ -129,25 +129,7 @@ export default function App() {
     if (pc.status === 'In Use') return 'PC is currently in use.';
 
     if (type === 'Guest') {
-      const updated = [...computers];
-      updated[pcIdx] = {
-        ...pc,
-        status: 'In Use',
-        playerName: 'Guest Mode',
-        remainingTime: 3600, // 1 hour for guests
-        balance: 0,
-        currentRate: rates.find(r => r.membership === 'Regular')?.ratePerHour || 15.00
-      };
-      saveComputersState(updated);
-      
-      SQLiteSimulator.addTransaction({
-        type: 'Usage Deduction',
-        amount: 15.00,
-        computerNumber: pcNum,
-        notes: `Guest session started PC-${pcNum}`
-      });
-      setTransactions(SQLiteSimulator.getTransactions() as any);
-      return null;
+      return 'Guest login is disabled. A registered member account is required.';
     }
 
     // Player profile mode

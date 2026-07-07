@@ -275,16 +275,16 @@ export default function App() {
     triggerNotification(`Sent LOCK command to PC #${pcNum}`);
   };
 
-  const handleRemoteUnlock = async (pcNum: number, userType: 'Player' | 'Guest') => {
+  const handleRemoteUnlock = async (pcNum: number, userType: 'Player' = 'Player') => {
     const isElectron = !!(window as any).electronAPI;
-    const username = userType === 'Guest' ? 'Guest_PC' + pcNum : 'remote_user';
+    const username = 'remote_user';
     
     if (isElectron) {
       try {
         await (window as any).electronAPI.remoteUnlockPc({
           pcNumber: pcNum,
           username,
-          userType
+          userType: 'Player'
         });
       } catch (err) {
         console.error(err);
@@ -297,12 +297,12 @@ export default function App() {
         ...prev[pcNum],
         status: 'Active',
         currentUser: username,
-        userType,
-        timeRemaining: userType === 'Guest' ? 3600 : 7200,
+        userType: 'Player',
+        timeRemaining: 7200, // Default 2 hours
         elapsedSeconds: 0
       }
     }));
-    triggerNotification(`Sent REMOTE UNLOCK (${userType}) to PC #${pcNum}`);
+    triggerNotification(`Sent REMOTE UNLOCK (Player) to PC #${pcNum}`);
   };
 
   // Utility to format seconds to clock layout HH:MM:SS
