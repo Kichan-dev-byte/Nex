@@ -295,17 +295,10 @@ export function ClientSimulator({
                     </div>
                   )}
 
-                  <div className="grid grid-cols-2 gap-3 pt-2">
-                    <button
-                      type="button"
-                      onClick={handleGuestLoginSubmit}
-                      className="bg-slate-800/80 hover:bg-slate-700 text-slate-200 py-2.5 px-4 rounded-xl text-xs font-bold transition active:scale-95 border border-white/5"
-                    >
-                      Guest Mode
-                    </button>
+                  <div className="pt-2">
                     <button
                       type="submit"
-                      className="bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 px-4 rounded-xl text-xs font-bold transition shadow-lg shadow-indigo-950/20 active:scale-95"
+                      className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 px-4 rounded-xl text-xs font-bold transition shadow-lg shadow-indigo-950/20 active:scale-95"
                     >
                       Login Account
                     </button>

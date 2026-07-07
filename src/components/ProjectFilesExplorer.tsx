@@ -69,7 +69,68 @@ const FILES_STRUCTURE: FileNode[] = [
         children: [
           { name: 'package.json', type: 'file', path: '/ComputerShop/Server/package.json' },
           { name: 'tsconfig.json', type: 'file', path: '/ComputerShop/Server/tsconfig.json' },
-          { name: 'electron-builder.json', type: 'file', path: '/ComputerShop/Server/electron-builder.json' }
+          { name: 'electron-builder.json', type: 'file', path: '/ComputerShop/Server/electron-builder.json' },
+          {
+            name: 'src',
+            type: 'dir',
+            path: '/ComputerShop/Server/src',
+            children: [
+              {
+                name: 'main',
+                type: 'dir',
+                path: '/ComputerShop/Server/src/main',
+                children: [
+                  {
+                    name: 'main.ts',
+                    type: 'file',
+                    path: '/ComputerShop/Server/src/main/main.ts',
+                    content: `import { app, BrowserWindow, ipcMain } from 'electron';
+import * as path from 'path';
+import express from 'express';
+import { createServer } from 'http';
+import { Server as SocketIOServer } from 'socket.io';
+
+// Sets up dynamic Express controls & Socket.io daemon...`
+                  }
+                ]
+              },
+              {
+                name: 'preload',
+                type: 'dir',
+                path: '/ComputerShop/Server/src/preload',
+                children: [
+                  {
+                    name: 'preload.ts',
+                    type: 'file',
+                    path: '/ComputerShop/Server/src/preload/preload.ts',
+                    content: `import { contextBridge, ipcRenderer } from 'electron';
+
+contextBridge.exposeInMainWorld('electronAPI', {
+  getPlayers: () => ipcRenderer.invoke('get-players'),
+  addPlayer: (p) => ipcRenderer.invoke('add-player', p)
+});`
+                  }
+                ]
+              },
+              {
+                name: 'renderer',
+                type: 'dir',
+                path: '/ComputerShop/Server/src/renderer',
+                children: [
+                  {
+                    name: 'App.tsx',
+                    type: 'file',
+                    path: '/ComputerShop/Server/src/renderer/src/App.tsx',
+                    content: `import React, { useState } from 'react';
+
+export default function App() {
+  return <div>LAN Computer Shop Central Server Management Console</div>;
+}`
+                  }
+                ]
+              }
+            ]
+          }
         ]
       },
       {
@@ -79,7 +140,47 @@ const FILES_STRUCTURE: FileNode[] = [
         children: [
           { name: 'package.json', type: 'file', path: '/ComputerShop/Client/package.json' },
           { name: 'tsconfig.json', type: 'file', path: '/ComputerShop/Client/tsconfig.json' },
-          { name: 'electron-builder.json', type: 'file', path: '/ComputerShop/Client/electron-builder.json' }
+          { name: 'electron-builder.json', type: 'file', path: '/ComputerShop/Client/electron-builder.json' },
+          {
+            name: 'src',
+            type: 'dir',
+            path: '/ComputerShop/Client/src',
+            children: [
+              {
+                name: 'main',
+                type: 'dir',
+                path: '/ComputerShop/Client/src/main',
+                children: [
+                  {
+                    name: 'main.ts',
+                    type: 'file',
+                    path: '/ComputerShop/Client/src/main/main.ts',
+                    content: `import { app, BrowserWindow, ipcMain } from 'electron';
+import { io } from 'socket.io-client';
+
+// Establishes lock screen full screen kiosk daemon...`
+                  }
+                ]
+              },
+              {
+                name: 'renderer',
+                type: 'dir',
+                path: '/ComputerShop/Client/src/renderer',
+                children: [
+                  {
+                    name: 'App.tsx',
+                    type: 'file',
+                    path: '/ComputerShop/Client/src/renderer/src/App.tsx',
+                    content: `import React from 'react';
+
+export default function App() {
+  return <div>Futuristic Workstation Lock Screen</div>;
+}`
+                  }
+                ]
+              }
+            ]
+          }
         ]
       }
     ]
